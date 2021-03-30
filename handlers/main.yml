@@ -1,0 +1,29 @@
+---
+- name: restart smtp_to_telegram
+  systemd:
+    daemon_reload: true
+    name: smtp_to_telegram
+    state: restarted
+  become: true
+  tags: smtp_to_telegram
+
+- name: restart smtp_to_telegram
+  systemd:
+    name: smtp_to_telegram
+    state: reloaded
+  become: true
+  tags: smtp_to_telegram
+
+- name: reload ufw
+  systemd:
+    name: ufw
+    state: reloaded
+  tags: smtp_to_telegram
+  become: true
+
+- name: reload firewalld
+  systemd:
+    name: firewalld
+    state: reloaded
+  tags: smtp_to_telegram
+  become: true

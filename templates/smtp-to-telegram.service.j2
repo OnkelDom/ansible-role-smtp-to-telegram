@@ -1,0 +1,47 @@
+{{ ansible_managed | comment }}
+[Unit]
+Description=SMTP to smtp_to_telegram
+Documentation=https://github.com/OnkelDom/smtp-to-smtp_to_telegram
+Wants=network-online.target
+After=network.target network-online.target
+
+[Service]
+Type=simple
+User={{ smtp_to_telegram_system_user }}
+Group={{ smtp_to_telegram_system_group }}
+ExecReload=/bin/kill -HUP $MAINPID
+
+ExecStart={{ smtp_to_telegram_binary_install_dir }}/smtp_to_telegram \
+{% if smtp_to_telegram_primary_host | length > 0 %}
+  --smtp-primary-host {{ smtp_to_telegram_primary_host }} \
+{% endif %}
+{% if smtp_to_telegram_api_prefix | length > 0 %}
+  --telegram-api-prefix {{ smtp_to_telegram_api_prefix }} \
+{% endif %}
+{% if smtp_to_telegram_bot_token | length > 0 %}
+  --telegram-bot-token {{ smtp_to_telegram_bot_token }} \
+{% endif %}
+{% if smtp_to_telegram_chat_ids | length > 0 %}
+  --telegram-chat-ids {{ smtp_to_telegram_chat_ids }} \
+{% endif %}
+{% if smtp_to_telegram_message_max_length | length > 0 %}
+  --message-max-length {{ smtp_to_telegram_message_max_length }} \
+{% endif %}
+{% if smtp_to_telegram_message_template | length > 0 %}
+  --message-template {{ smtp_to_telegram_message_template }} \
+{% endif %}
+  --smtp-listen {{ smtp_to_telegram_listen_address }}:{{ smtp_to_telegram_listen_port }}
+
+KillSignal=SIGINT
+SyslogIdentifier=smtp_to_telegram
+Restart=on-failure
+RestartSec=5
+{% if smtp_to_telegram_http_proxy is defined and smtp_to_telegram_http_proxy | length > 0 %}
+Environment="HTTP_PROXY={{ smtp_to_telegram_http_proxy }}"
+{% endif %}
+{% if smtp_to_telegram_https_proxy is defined and smtp_to_telegram_https_proxy | length > 0 %}
+Environment="HTTPS_PROXY={{ smtp_to_telegram_https_proxy }}"
+{% endif %}
+
+[Install]
+WantedBy=multi-user.target

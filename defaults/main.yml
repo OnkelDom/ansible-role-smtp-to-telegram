@@ -1,0 +1,17 @@
+---
+proxy_env: {}
+smtp_to_telegram_version: 1.0.3
+smtp_to_telegram_allow_firewall: false
+smtp_to_telegram_binary_install_dir: /usr/local/bin
+smtp_to_telegram_system_user: "{{ smtp_to_telegram_user | default('prometheus') }}"
+smtp_to_telegram_system_group: "{{ smtp_to_telegram_group | default('prometheus') }}"
+smtp_to_telegram_listen_address: 0.0.0.0
+smtp_to_telegram_listen_port: 8888
+smtp_to_telegram_primary_host: "{{ ansible_hostname }}.{{ ansible_domain }}"
+smtp_to_telegram_api_prefix: ""
+smtp_to_telegram_bot_token: "" # telegram bot token
+smtp_to_telegram_chat_ids: "" # comma seperatet list of chat ids
+smtp_to_telegram_message_max_length: 0
+smtp_to_telegram_message_template: "From: {from}\\nTo: {to}\\nSubject: {subject}\\n\\n{body}"
+smtp_to_telegram_http_proxy: ""
+smtp_to_telegram_https_proxy: ""
