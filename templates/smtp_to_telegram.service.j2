@@ -24,7 +24,7 @@ ExecStart={{ smtp_to_telegram_binary_install_dir }}/smtp_to_telegram \
 {% if smtp_to_telegram_chat_ids | length > 0 %}
   --telegram-chat-ids {{ smtp_to_telegram_chat_ids }} \
 {% endif %}
-{% if smtp_to_telegram_message_max_length | length > 0 %}
+{% if smtp_to_telegram_message_max_length > 0 %}
   --message-max-length {{ smtp_to_telegram_message_max_length }} \
 {% endif %}
 {% if smtp_to_telegram_message_template | length > 0 %}
