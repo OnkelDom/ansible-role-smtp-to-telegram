@@ -28,7 +28,7 @@ ExecStart={{ smtp_to_telegram_binary_install_dir }}/smtp_to_telegram \
   --message-max-length {{ smtp_to_telegram_message_max_length }} \
 {% endif %}
 {% if smtp_to_telegram_message_template | length > 0 %}
-  --message-template {{ smtp_to_telegram_message_template }} \
+  --message-template "{{ smtp_to_telegram_message_template }}" \
 {% endif %}
   --smtp-listen {{ smtp_to_telegram_listen_address }}:{{ smtp_to_telegram_listen_port }}
 
