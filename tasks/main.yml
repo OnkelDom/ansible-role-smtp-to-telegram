@@ -71,7 +71,7 @@
 - block:
   - name: get checksum list from github
     set_fact:
-      _checksums: "{{ lookup('url', 'https://github.com/OnkelDom/smtp-to-telegram/releases/download/v' + smtp_to_telegram_version + 'checksums.txt', wantlist=True) | list }}"
+      _checksums: "{{ lookup('url', 'https://github.com/OnkelDom/smtp-to-telegram/releases/download/v' + smtp_to_telegram_version + '/checksums.txt', wantlist=True) | list }}"
     environment: "{{ proxy_env }}"
     run_once: true
     become: true
@@ -121,7 +121,7 @@
     notify: restart smtp_to_telegram
     become: true
     tags: smtp_to_telegram
-  when: (not __smtp_to_telegram_is_installed.stat.exists) or (__smtp_to_telegram_current_version_output.stdout.split(" ")[2]) != smtp_to_telegram_version)
+  when: (not __smtp_to_telegram_is_installed.stat.exists) or (__smtp_to_telegram_current_version_output.stdout.split(" ")[2] != smtp_to_telegram_version)
 
 - name: create systemd service unit
   template:
