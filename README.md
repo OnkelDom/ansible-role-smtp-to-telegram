@@ -23,7 +23,6 @@ This role depens on ansible-role-prometheus
 ## Requirements
 
 - Ansible >= 2.9 (It might work on previous versions, but we cannot guarantee it)
-- Community Packages: `ansible-galaxy collection install community.general`
 
 ## Role Variables
 
@@ -33,7 +32,6 @@ All variables which can be overridden are stored in [defaults/main.yml](defaults
 | -------------- | ------------- | -----------------------------------|
 | `proxy_env` |  {} | Set proxy environment variables |
 | `smtp_to_telegram_version` | 1.0.3 | app version |
-| `smtp_to_telegram_allow_firewall` | false | allow firewall access |
 | `smtp_to_telegram_binary_install_dir` | /usr/local/bin | binary install dir |
 | `smtp_to_telegram_system_user` | prometheus | default user |
 | `smtp_to_telegram_system_group` | prometheus | deefault group |
